@@ -33,3 +33,11 @@ export async function back() {
         throw error;
     }
 }
+
+export function normalizeCardName(rawText) {
+    return rawText
+        .replace(/-\s*\n/g, '')
+        .replace(/\n/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
