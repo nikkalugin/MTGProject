@@ -53,6 +53,26 @@ class SearchScreen {
         return $(`(//android.widget.Button[@content-desc="Add"])[1]`);
     }
 
+    get firstCardOnList() {
+        return $$('android.widget.ImageView')[0];
+    }
+
+    get secondCardOnList() {
+        return $$(`android.widget.ImageView`)[1];
+    }
+
+    get languageList() {
+        return $(`~Language`);
+    }
+
+    async openFirstCardOnList() {
+        await this.firstCardOnList.click();
+    }
+
+    async openSecondCardOnList() {
+        await this.secondCardOnList.click();
+    }
+
     async verifySearchScreenIsOpen() {
         await expect(this.searchScreen).toBeDisplayed();
     }
@@ -119,6 +139,38 @@ class SearchScreen {
                 return;
             }
         }
+    }
+
+    async clickNecessarySetRecord(value) {
+        const elements = await $$('//*[@content-desc]');
+
+        for (const el of elements) {
+            const rawText = await el.getAttribute('content-desc');
+            const normalized = normalizeCardName(rawText);
+
+            if (normalized === value) {
+                await el.click();
+                return;
+            }
+        }
+    }
+
+    async clickNecessaryLanguageValue(value) {
+        const elements = await $$('//*[@content-desc]');
+
+        for (const el of elements) {
+            const rawText = await el.getAttribute('content-desc');
+            const normalized = normalizeCardName(rawText);
+
+            if (normalized === value) {
+                await el.click();
+                return;
+            }
+        }
+    }
+
+    async verifyLanguageListIsOpen() {
+        await expect(this.languageList).toBeDisplayed();
     }
 
     async clickBinBtn() {
