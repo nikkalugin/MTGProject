@@ -33,6 +33,8 @@ class CardForm {
         await this.optionsBtn.click();
     }
 
+ //*----------------------- List of actions -----------------------*\\
+
     async clickAddToCollectionBtn() {
         await this.addToCollectionBtn.click();
     }

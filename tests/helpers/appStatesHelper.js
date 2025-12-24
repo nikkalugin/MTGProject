@@ -60,60 +60,52 @@ export async function scrollDown(times = 1) {
     }
 }
 
-// export async function scrollLeft(times = 1) {
-//     try {
-//         for (let i = 0; i < times; i++) {
-//             await driver.performActions([
-//                 {
-//                     type: 'pointer',
-//                     id: 'finger1',
-//                     parameters: { pointerType: 'touch' },
-//                     actions: [
-//                         { type: 'pointerMove', duration: 0, x: 1000, y: 1200 },
-//                         { type: 'pointerDown', button: 0 },
-//                         { type: 'pause', duration: 250 },
-//                         { type: 'pointerMove', duration: 1000, x: 400, y: 1200 },
-//                         { type: 'pointerUp', button: 0 },
-//                         { type: 'pause', duration: 250 }
-//                     ]
-//                 }
-//             ]);
-//         }
-//     } catch (error) {
-//         console.error(`Failed to scrolling left ${error}`);
-//         throw error;
-//     }
-// }
+export async function holding(x, y) {
+    try {
+        await driver.performActions([
+            {
+                type: 'pointer',
+                id: 'finger1',
+                parameters: { pointerType: 'touch' },
+                actions: [
+                    { type: 'pointerMove', duration: 0, x: x, y: y},
+                    { type: 'pointerDown', button: 0 },
+                    { type: 'pause', duration: 1000 },
+                    { type: 'pointerUp', button: 0 }
+                ]
+            }
+        ]);
+    } catch (error) {
+        console.error(`Failed to holding ${error}`);
+        throw error;
+    }
+}
 
-// export async function scrollRight(times = 1) {
-//     try {
-//         for (let i = 0; i < times; i++) {
-//             await driver.performActions([
-//                 {
-//                     type: 'pointer',
-//                     id: 'finger1',
-//                     parameters: { pointerType: 'touch' },
-//                     actions: [
-//                         { type: 'pointerMove', duration: 0, x: 100, y: 1200 },
-//                         { type: 'pointerDown', button: 0 },
-//                         { type: 'pause', duration: 250 },
-//                         { type: 'pointerMove', duration: 1000, x: 700, y: 1200 },
-//                         { type: 'pointerUp', button: 0 },
-//                         { type: 'pause', duration: 250 }
-//                     ]
-//                 }
-//             ]);
-//         }
-//     } catch (error) {
-//         console.error(`Failed to scrolling right ${error}`);
-//         throw error;
-//     }
-// }
-
-export function normalizeCardName(rawText) {
+function normalizeCardName(rawText) {
     return rawText
+        .replace(/^\s*-\s*$/gm, '')
         .replace(/-\s*\n/g, '')
+        .replace(/\n-\s*/g, '')
         .replace(/\n/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
+}
+
+export async function findElementByNormalizedText(expectedValue) {
+    const elements = await $$('//*[@content-desc]');
+    const matchedElements = [];
+
+    for (const el of elements) {
+        const rawText = await el.getAttribute('content-desc');
+
+        if (!rawText) continue;
+
+        const normalized = normalizeCardName(rawText);
+
+        if (normalized === expectedValue) {
+            matchedElements.push(el);
+        }
+    }
+
+    return matchedElements;
 }

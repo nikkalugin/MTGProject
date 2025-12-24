@@ -65,6 +65,8 @@ class SearchScreen {
         return $(`~Language`);
     }
 
+ //*----------------------- List of actions -----------------------*\\
+
     async openFirstCardOnList() {
         await this.firstCardOnList.click();
     }
