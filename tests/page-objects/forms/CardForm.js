@@ -1,4 +1,4 @@
-import { normalizeCardName } from "../../helpers/appStatesHelper";
+import { findElementByNormalizedText } from "../../helpers/appStatesHelper";
 
 class CardForm {
     get rulingStats() {
@@ -48,17 +48,15 @@ class CardForm {
     }
 
     async verifyValueAppeared(value) {
-        const elements = await $$('//*[@content-desc]');
-
-        for (const el of elements) {
-            const rawText = await el.getAttribute('content-desc');
-            const normalized = normalizeCardName(rawText);
-
-            if (normalized === value) {
-                await expect(el).toBeDisplayed();
-                return;
-            }
+        const matchedElements = await findElementByNormalizedText(value);
+        if (matchedElements.length !== 1) {
+            throw new Error(
+                `Expected exactly 1 element with text "${value}", but found ${matchedElements.length}`
+            );
         }
+        const element = matchedElements[0];
+        await element.waitForDisplayed();
+        await expect(element).toBeDisplayed();
     }
 
     async openRulingStats() {

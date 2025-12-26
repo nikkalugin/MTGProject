@@ -4,7 +4,7 @@ import FooterScreen from '../page-objects/screens/FooterScreen';
 import SearchScreen from '../page-objects/screens/SearchScreen';
 import CardForm from '../page-objects/forms/CardForm';
 
-describe('Search tests', () => {
+describe.only('Search tests', () => {
     beforeEach(async () => {
         await activateApp("skilldevs.com.manabox");
         await FooterScreen.openSearchScreen();
@@ -81,7 +81,7 @@ describe('Search tests', () => {
 
     it('Add values into Stats dropdown', async () => {
         await SearchScreen.addStatsValue(3);
-        await SearchScreen.verifyValueAppeared(['=', '3']);
+        await SearchScreen.verifyValueAppeared('3');
     });
 
     it('Open first card of the list and verify its Type = Creature', async () => {
@@ -132,7 +132,7 @@ describe('Search tests', () => {
     it('Open first Sets record and verify it', async () => {
         await SearchScreen.openSetsTab();
         await SearchScreen.clickNecessarySetRecord('Marvel Super Heroes Commander (MSC) 4 cards SPOILER 26/06/2026');
-        await SearchScreen.verifyValueAppeared('Marvel Super Heroes Commander cards 26/06/2026')
+        await SearchScreen.verifyValueAppeared('Marvel Super Heroes Commander 4 cards 26/06/2026')
     });
 
     it('Open first card in first set record and verify it', async () => {
@@ -153,7 +153,7 @@ describe('Search tests', () => {
         await SearchScreen.verifyValueAppeared('Japanese');
     });
 
-    it.only('Scrolling to the next card', async () => {
+    it('Scrolling to the next card', async () => {
         await SearchScreen.clickFilterLegalityValue(`Modern`);
         await SearchScreen.clickApproveBtn();
         await SearchScreen.openFirstCardOnList();
@@ -162,7 +162,7 @@ describe('Search tests', () => {
         await CardForm.verifyValueAppeared('A Killer Among Us');
     });
 
-    it.only('Scrolling to the previous card', async () => {
+    it('Scrolling to the previous card', async () => {
         await SearchScreen.clickFilterLegalityValue(`Modern`);
         await SearchScreen.clickApproveBtn();
         await SearchScreen.openSecondCardOnList();

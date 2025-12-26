@@ -1,4 +1,4 @@
-import { hideKeyboard, normalizeCardName } from "../../helpers/appStatesHelper";
+import { hideKeyboard, findElementByNormalizedText } from "../../helpers/appStatesHelper";
 
 class SearchScreen {
     get searchScreen() {
@@ -115,60 +115,55 @@ class SearchScreen {
     }
 
     async clickFilterLegalityValue(value) {
-        const elements = await $$('//*[@content-desc]');
-
-        for (const el of elements) {
-            const rawText = await el.getAttribute('content-desc');
-            const normalized = normalizeCardName(rawText);
-
-            if (normalized === value) {
-                await el.click();
-                return;
-            }
+        const matchedElements = await findElementByNormalizedText(value);
+        if (matchedElements.length !== 1) {
+            throw new Error(
+                `Expected exactly 1 element with text "${value}", but found ${matchedElements.length}`
+            );
         }
+        const element = matchedElements[0];
+        await element.waitForDisplayed();
+        await element.click();
     }
 
     async verifyValueAppeared(values) {
         const expectedValues = Array.isArray(values) ? values : [values];
-        const elements = await $$('//*[@content-desc]');
 
-        for (const el of elements) {
-            const rawText = await el.getAttribute('content-desc');
-            const normalized = normalizeCardName(rawText);
-
-            if (expectedValues.includes(normalized)) {
-                await expect(el).toBeDisplayed();
-                return;
+        for (const value of expectedValues) {
+            const matchedElements = await findElementByNormalizedText(value);
+            if (matchedElements.length !== 1) {
+                throw new Error(
+                    `Expected exactly 1 element with text "${value}", but found ${matchedElements.length}`
+                );
             }
+            const element = matchedElements[0];
+            await element.waitForDisplayed();
+            await expect(element).toBeDisplayed();
         }
     }
 
     async clickNecessarySetRecord(value) {
-        const elements = await $$('//*[@content-desc]');
-
-        for (const el of elements) {
-            const rawText = await el.getAttribute('content-desc');
-            const normalized = normalizeCardName(rawText);
-
-            if (normalized === value) {
-                await el.click();
-                return;
-            }
+        const matchedElements = await findElementByNormalizedText(value);
+        if (matchedElements.length !== 1) {
+            throw new Error(
+                `Expected exactly 1 element with text "${value}", but found ${matchedElements.length}`
+            );
         }
+        const element = matchedElements[0];
+        await element.waitForDisplayed();
+        await element.click();
     }
 
     async clickNecessaryLanguageValue(value) {
-        const elements = await $$('//*[@content-desc]');
-
-        for (const el of elements) {
-            const rawText = await el.getAttribute('content-desc');
-            const normalized = normalizeCardName(rawText);
-
-            if (normalized === value) {
-                await el.click();
-                return;
-            }
+        const matchedElements = await findElementByNormalizedText(value);
+        if (matchedElements.length !== 1) {
+            throw new Error(
+                `Expected exactly 1 element with text "${value}", but found ${matchedElements.length}`
+            );
         }
+        const element = matchedElements[0];
+        await element.waitForDisplayed();
+        await element.click();
     }
 
     async verifyLanguageListIsOpen() {
