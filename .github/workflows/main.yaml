@@ -41,7 +41,7 @@ jobs:
       run: npm install
 
     - name: Run WDIO tests
-      run: npm run wdio
+      run: npm run test:mobile
 
     - name: Generate Allure report
       if: ${{ always() }} 
