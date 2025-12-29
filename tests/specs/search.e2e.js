@@ -148,7 +148,7 @@ describe('Search tests', () => {
         await SearchScreen.verifyLanguageListIsOpen();
     });
 
-    it.only('Open Language List, choose Japanese language and verify it has chosen', async () => {
+    it('Open Language List, choose Japanese language and verify it has chosen', async () => {
         await SearchScreen.clickNecessaryLanguageValue('English');
         await SearchScreen.clickNecessaryLanguageValue('Japanese');
         await SearchScreen.verifyLanguageValueIsDisplayed('Japanese');
