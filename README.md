@@ -59,7 +59,7 @@ It covers **UI, functional, and API test scenarios**, follows modern automation 
 ├── jsconfig.json
 ├── wdio.conf.js
 └── README.md
-
+```
 ---
 
 ## CI/CD Integration (GitHub Actions)
