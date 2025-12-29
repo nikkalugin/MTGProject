@@ -1,5 +1,3 @@
-import { findElementByNormalizedText, holding } from "../../helpers/appStatesHelper";
-
 class CollectionScreen {
     get collectionHeading() {
         return $(`~Collection`);
@@ -51,20 +49,27 @@ class CollectionScreen {
         await this.allCollectionBtn.click();
     }
 
-    async verifyRecordAppeared(value) {
-        const matchedElements = await findElementByNormalizedText(value);
-        if (matchedElements.length !== 1) {
-            throw new Error(
-                `Expected exactly 1 element with text "${value}", but found ${matchedElements.length}`
-            );
-        }
-        const element = matchedElements[0];
-        await element.waitForDisplayed();
-        await expect(element).toBeDisplayed();
+    async verifyCollectionRecordIsDisplayed(name) {
+        const parts = Array.isArray(name) ? name : name.split(' ').filter(Boolean);
+
+        const containsConditions = parts.map(part => `contains(@content-desc, "${part}")`).join(' and ');
+       
+        const collectionRecord = $(`//android.view.View[${containsConditions}]`);
+        await expect(collectionRecord).toBeDisplayed();
     }
 
-    async openingRecordSettings(x, y) {
-        await holding(x, y);
+    async verifyRecordIsRemoved(name) {
+        const parts = Array.isArray(name) ? name : name.split(' ').filter(Boolean);
+
+        const containsConditions = parts.map(part => `contains(@content-desc, "${part}")`).join(' and ');
+       
+        const collectionRecord = $(`//android.view.View[${containsConditions}]`);
+        await expect(collectionRecord).not.toBeDisplayed();
+    }
+
+    async openingRecordSettings(name) {
+        const collectionRecord = $(`//android.view.View[contains(@content-desc, "${name}")]`);
+        await collectionRecord.click({ duration: 1000 });
     }
 
     async verifyRecordSettingsAreOpen() {

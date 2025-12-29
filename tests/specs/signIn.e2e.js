@@ -7,7 +7,7 @@ import SignInForm from '../page-objects/forms/SignInForm';
 import { activateApp, terminateApp } from '../helpers/appStatesHelper';
 import ResetPasswordForm from '../page-objects/forms/ResetPasswordForm';
 
-describe.skip('Sign In tests', () => {
+describe('Sign In tests', () => {
     beforeEach(async () => {
         await activateApp("skilldevs.com.manabox");
         await HomeScreen.verifyHomePageIsOpen();

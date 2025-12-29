@@ -67,6 +67,43 @@ class SearchScreen {
 
  //*----------------------- List of actions -----------------------*\\
 
+    async verifyCardIsDisplayed(cardName) {
+        const card = $(`//android.widget.ImageView[contains(@content-desc, "${cardName}")]`);
+        await expect(card).toBeDisplayed();
+    }
+
+    async verifyLanguageValueIsDisplayed(value) {
+        const language = $(`//android.widget.Button[contains(@content-desc, "${value}")]`);
+        await expect(language).toBeDisplayed();
+    }
+
+    async verifyLegalityFilterValueIsDisplayed(value) {
+        const parts = Array.isArray(value) ? value : value.split(' ').filter(Boolean);
+
+        const containsConditions = parts.map(part => `contains(@content-desc, "${part}")`).join(' and ');
+        
+        const legality = $(`//android.view.View[${containsConditions}]`);
+        await expect(legality).toBeDisplayed();
+    }
+
+    async verifySetRecordIsDisplayed(name) {
+        const parts = Array.isArray(name) ? name : name.split(' ').filter(Boolean);
+
+        const containsConditions = parts.map(part => `contains(@content-desc, "${part}")`).join(' and ');
+       
+        const setRecord = $(`//android.widget.Button[${containsConditions}]`);
+        await expect(setRecord).toBeDisplayed();
+    }
+
+    async verifySetHeadingIsDisplayed(name) {
+        const parts = Array.isArray(name) ? name : name.split(' ').filter(Boolean);
+
+        const containsConditions = parts.map(part => `contains(@content-desc, "${part}")`).join(' and ');
+       
+        const setHeading = $(`//android.view.View[${containsConditions}]`);
+        await expect(setHeading).toBeDisplayed();
+    }
+
     async openFirstCardOnList() {
         await this.firstCardOnList.click();
     }
@@ -126,7 +163,7 @@ class SearchScreen {
         await element.click();
     }
 
-    async verifyValueAppeared(values) {
+    async verifyFilterConditionsAreDisplayed(values) {
         const expectedValues = Array.isArray(values) ? values : [values];
 
         for (const value of expectedValues) {

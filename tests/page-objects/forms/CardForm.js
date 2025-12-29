@@ -35,6 +35,28 @@ class CardForm {
 
  //*----------------------- List of actions -----------------------*\\
 
+    async verifyLegalityValueIsPresent(value) {
+        const [first, second] = value.split(' ');
+
+        const legality = $(`//android.view.View[contains(@content-desc, "${first}") and contains(@content-desc, "${second}")]`);
+        await expect(legality).toBeDisplayed();
+    }
+
+    async verifyCardByType(value) {
+        const parts = Array.isArray(value) ? value : value.split(' ').filter(Boolean);
+
+        const containsConditions = parts.map(part => `contains(@content-desc, "${part}")`).join(' and ');
+        
+        const description = $(`//android.view.View[${containsConditions}]`);
+        await expect(description).toBeDisplayed();
+    }
+
+    async verifyCardNameIsDisplayed(value) {
+        const cardName = $(`~${value}`)
+        
+        await expect(cardName).toBeDisplayed();
+    }
+
     async clickAddToCollectionBtn() {
         await this.addToCollectionBtn.click();
     }

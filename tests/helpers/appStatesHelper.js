@@ -60,27 +60,6 @@ export async function scrollDown(times = 1) {
     }
 }
 
-export async function holding(x, y) {
-    try {
-        await driver.performActions([
-            {
-                type: 'pointer',
-                id: 'finger1',
-                parameters: { pointerType: 'touch' },
-                actions: [
-                    { type: 'pointerMove', duration: 0, x: x, y: y},
-                    { type: 'pointerDown', button: 0 },
-                    { type: 'pause', duration: 1000 },
-                    { type: 'pointerUp', button: 0 }
-                ]
-            }
-        ]);
-    } catch (error) {
-        console.error(`Failed to holding ${error}`);
-        throw error;
-    }
-}
-
 function normalizeCardName(rawText) {
     return rawText
         .replace(/^\s*-\s*$/gm, '')

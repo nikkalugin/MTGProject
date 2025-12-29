@@ -6,7 +6,7 @@ import RegisterForm from '../page-objects/forms/RegisterForm';
 import SignInForm from '../page-objects/forms/SignInForm';
 import { activateApp, terminateApp } from '../helpers/appStatesHelper';
 
-describe.skip('Register tests', () => {
+describe('Register tests', () => {
     beforeEach(async () => {
         await activateApp("skilldevs.com.manabox");
         await HomeScreen.verifyHomePageIsOpen();
