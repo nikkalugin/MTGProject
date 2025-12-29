@@ -19,11 +19,11 @@ jobs:
       with:
         node-version: 20
 
-    - name: Install dependencies
-      run: npm install
+    - name: Build API tests image
+      run: docker build -t mtg-api-tests -f Dockerfile.api .
 
     - name: Run API tests
-      run: npm run test:api
+      run: docker run --rm mtg-api-tests
 
   mtg-tests:
     runs-on: self-hosted

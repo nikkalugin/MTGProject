@@ -41,13 +41,13 @@ It covers **UI, functional, and API test scenarios**, follows modern automation 
 │   │   │   ├── RegisterForm.js
 │   │   │   ├── ResetPasswordForm.js
 │   │   │   └── SignInForm.js
-│   │   ├── screens/
-│   │   │   ├── CollectionScreen.js
-│   │   │   ├── FooterScreen.js
-│   │   │   ├── HomeScreen.js
-│   │   │   ├── ManaboxScreen.js
-│   │   │   ├── SearchScreen.js
-│   │   │   └── SettingsScreen.js
+│   │   └── screens/
+│   │       ├── CollectionScreen.js
+│   │       ├── FooterScreen.js
+│   │       ├── HomeScreen.js
+│   │       ├── ManaboxScreen.js
+│   │       ├── SearchScreen.js
+│   │       └── SettingsScreen.js
 │   ├── specs/
 │   │   ├── collection.e2e.js
 │   │   ├── register.e2e.js
@@ -94,7 +94,7 @@ Reports are available:
 
 ## Test Coverage Checklist
 
-**Legend**
+**Statuses**
 
 - 🟢 Passed  
 - 🔴 Failed  
@@ -198,7 +198,7 @@ Reports are available:
 ## Summary
 
 - **Total Automated Scenarios:** 70+
-- **Platforms:** Android
+- **Platforms:** Android (self-hosted)
 - **Execution:** Local & CI
 - **Reporting:** Allure
 - **Architecture:** Page Object Model
@@ -212,3 +212,13 @@ Reports are available:
 npm run test:mobile
 npm run test:api
 npm run test:all
+```
+---
+
+## 🐳 Docker
+
+### Run API tests
+docker compose up --build api-tests
+
+### Run Allure
+http://localhost:5050
