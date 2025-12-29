@@ -1,104 +1,214 @@
-# Тестова документація для Manabox MTG (WDIO + Appium)
+# Manabox MTG Mobile Automation Project
 
-## Загальний опис
-Проект включає автоматизацію тестування мобільного додатка Manabox MTG з використанням:
-- **WDIO** (WebdriverIO) як тестового фреймворку
-- **Appium** для мобільної автоматизації
+## 📱 Project Overview
 
-Тести покривають основні функціональності додатка:
-- Робота з колекціями
-- Пошук карток
-- Реєстрація та авторизація
+This project is an automated testing framework for the **Manabox MTG mobile application**, built using **WebdriverIO (JavaScript) + Appium**.  
+It covers **UI, functional, and API test scenarios**, follows modern automation best practices, and is fully integrated into a **CI/CD pipeline** with detailed reporting.
 
 ---
 
-## Тестовий чекліст
+## 🛠️ Technology Stack
 
-### 1. Колекції (`collection.e2e.js`)
-
-#### 1.1 Тестування форм
-- [ ] Binder Form відкривається успішно
-- [ ] Binder Form закривається після натискання Cancel
-- [ ] Color Picker у Binder Form відкривається
-- [ ] Color Picker у Binder Form закривається
-- [ ] Повідомлення про пусте ім'я у Binder Form (Can't be empty)
-- [ ] Перехід з Binder Form до List Form
-- [ ] List Form відкривається
-- [ ] List Form закривається після натискання Cancel
-- [ ] Color Picker у List Form відкривається
-- [ ] Color Picker у List Form закривається
-- [ ] Повідомлення про пусте ім'я у List Form (Can't be empty)
-- [ ] Перехід з List Form до Binder Form
-
-#### 1.2 Додавання записів
-- [ ] Додавання одного запису Collection
-- [ ] Додавання одного запису List
-
-#### 1.3 Тестування інструментів налаштувань
-- [ ] Відкриття налаштувань запису
-- [ ] Редагування запису Collection
-- [ ] Відкриття Delete Popup
-- [ ] Закриття Delete Popup
+- **Language:** JavaScript (ES6+)
+- **Test Framework:** WebdriverIO (WDIO)
+- **Mobile Automation:** Appium
+- **Design Pattern:** Page Object Model (POM)
+- **Assertion Library:** WDIO Expect
+- **Reporting:** Allure Reporter
+- **CI/CD:** GitHub Actions
+- **API Testing:** WDIO + Mocha / Axios
+- **Version Control:** Git & GitHub
 
 ---
 
-### 2. Реєстрація (`register.e2e.js`)
-- [ ] Повідомлення про помилки при пустих полях
-- [ ] Повідомлення про слабкий пароль
-- [ ] Повідомлення про пусті email та repeat password
-- [ ] Перехід на сторінку Sign In
+## 📂 Project Structure
+
+```text
+├── .github/
+│   └── workflows/
+│       └── main.yml                # GitHub Actions CI pipeline
+├── allure-results/               # Allure raw results
+├── allure-report/                # Generated Allure report
+├── tests/
+│   ├── api/
+│   │   └── cards.test.js         # API test scenarios
+│   ├── page-objects/
+│   │   ├── forms/
+│   │   │   ├── BinderForm.js
+│   │   │   ├── CardForm.js
+│   │   │   ├── DeleteForm.js
+│   │   │   ├── ListForm.js
+│   │   │   ├── RegisterForm.js
+│   │   │   ├── ResetPasswordForm.js
+│   │   │   └── SignInForm.js
+│   │   ├── screens/
+│   │   │   ├── CollectionScreen.js
+│   │   │   ├── FooterScreen.js
+│   │   │   ├── HomeScreen.js
+│   │   │   ├── ManaboxScreen.js
+│   │   │   ├── SearchScreen.js
+│   │   │   └── SettingsScreen.js
+│   ├── specs/
+│   │   ├── collection.e2e.js
+│   │   ├── register.e2e.js
+│   │   ├── search.e2e.js
+│   │   └── signIn.e2e.js
+│   └── helpers/
+│       └── appStatesHelper.js
+├── package.json
+├── jsconfig.json
+├── wdio.conf.js
+└── README.md
 
 ---
 
-### 3. Пошук (`search.e2e.js`)
+## CI/CD Integration (GitHub Actions)
 
-#### 3.1 Основні функції пошуку
-- [ ] Робота пошуку (за Black Lotus)
-- [ ] Значення зберігається після кнопки Back
-- [ ] Фільтрація за легальністю (Standard)
-- [ ] Видалення фільтру через Bin button
-- [ ] Фільтр залишається активним при переключенні сторінок
-- [ ] Відкриття/закриття додаткових фільтрів
+The CI pipeline automatically:
 
-#### 3.2 Тестування фільтрів
-- [ ] Фільтрація за Type Line (Artifact)
-- [ ] Видалення фільтру Type Line
-- [ ] Додавання значень у Stats dropdown
-- [ ] Відкриття карти та перевірка типу (Creature)
+1. Installs dependencies
+2. Executes UI & API tests
+3. Generates Allure results
+4. Publishes Allure reports as artifacts
 
-#### 3.3 Легальність карток
-- [ ] Перевірка Legal PreDH статусу
-- [ ] Перевірка Banned Brawl статусу
-- [ ] Перевірка Not Legal Historic статусу
-
-#### 3.4 Робота з наборами (Sets)
-- [ ] Відкриття сторінки наборів
-- [ ] Перевірка запису "Marvel Super Heroes Commander"
-- [ ] Відкриття карти з набору
-- [ ] Перевірка мовних фільтрів (English/Japanese)
-
-#### 3.5 Навігація між картками
-- [ ] Перехід до наступної карти
-- [ ] Перехід до попередньої карти
+✅ **Allure is fully integrated into CI/CD**  
+✅ **Test reports are available for each pipeline run**
 
 ---
 
-### 4. Авторизація (`signIn.e2e.js`) (за виключенням)
-- [ ] Повідомлення про пусті поля
-- [ ] Повідомлення про пустий пароль
-- [ ] Повідомлення про пустий email
-- [ ] Повідомлення про невірний пароль
-- [ ] Перехід на сторінку реєстрації
-- [ ] Відкриття попапу Reset Password
-- [ ] Закриття попапу Reset Password
+## Reporting (Allure)
+
+All test executions generate detailed **Allure reports** including:
+
+- test steps
+- screenshots on failure
+- execution time
+- environment details
+
+Reports are available:
+
+- locally
+- as CI artifacts
 
 ---
 
-## Виконані тести
-✅ Всі тести структуровані за модулями додатка  
-✅ Кожен тестовий кейс має чітку назву з описом очікуваної поведінки  
-✅ Включено перевірки позитивних і негативних сценаріїв  
-✅ Особливі випадки позначено (наприклад, `.skip` для Sign In тестів)
+## Test Coverage Checklist
 
-## Коментарі
-- Значення координат (`550, 1050`) для `openingRecordSettings` можуть потребувати адаптації для різних пристроїв (ще буде зредаговано)
+**Legend**
+
+- 🟢 Passed  
+- 🔴 Failed  
+- 🟡 Not Executed  
+
+---
+
+## Collection – Binder & List Forms
+
+| Section    | Sub-section   | Description                                           | Result    |
+| ---------- | ------------- | ----------------------------------------------------- | --------- |
+| Collection | Binder Form   | Verify Binder Form is opened successfully             | 🟢 Passed |
+| Collection | Binder Form   | Verify Binder Form is closed via Cancel button        | 🟢 Passed |
+| Collection | Binder Form   | Verify Color Picker is opened                         | 🟢 Passed |
+| Collection | Binder Form   | Verify Color Picker is closed                         | 🟢 Passed |
+| Collection | Binder Form   | Verify Name field "Can't be empty" error is displayed | 🟢 Passed |
+| Collection | Binder → List | Verify List Form is opened from Binder Form           | 🟢 Passed |
+| Collection | List Form     | Verify List Form is opened successfully               | 🟢 Passed |
+| Collection | List Form     | Verify List Form is closed via Cancel button          | 🟢 Passed |
+| Collection | List Form     | Verify Color Picker is opened                         | 🟢 Passed |
+| Collection | List Form     | Verify Color Picker is closed                         | 🟢 Passed |
+| Collection | List Form     | Verify Name field "Can't be empty" error is displayed | 🟢 Passed |
+| Collection | List → Binder | Verify Binder Form is opened from List Form           | 🟢 Passed |
+
+---
+
+## Collection - Adding Records
+
+| Section    | Sub-section    | Description                       | Result    |
+| ---------- | -------------- | --------------------------------- | --------- |
+| Collection | Binder Records | Add new Binder record             | 🟢 Passed |
+| Collection | Binder Records | Verify Binder record is displayed | 🟢 Passed |
+| Collection | List Records   | Add new List record               | 🟢 Passed |
+| Collection | List Records   | Verify List record is displayed   | 🟢 Passed |
+
+---
+
+## Collection - Record Settings & Editing
+
+| Section    | Sub-section     | Description                       | Result    |
+| ---------- | --------------- | --------------------------------- | --------- |
+| Collection | Record Settings | Open record settings              | 🟢 Passed |
+| Collection | Delete Popup    | Open delete confirmation popup    | 🟢 Passed |
+| Collection | Delete Popup    | Close delete popup                | 🟢 Passed |
+| Collection | Edit Record     | Edit collection record name       | 🟢 Passed |
+| Collection | Edit Record     | Verify edited record is displayed | 🟢 Passed |
+
+---
+
+## Authentication - Registration
+
+| Section | Sub-section | Description                                   | Result    |
+| ------- | ----------- | --------------------------------------------- | --------- |
+| Auth    | Register    | Verify errors when all fields are empty       | 🟢 Passed |
+| Auth    | Register    | Verify weak password errors                   | 🟢 Passed |
+| Auth    | Register    | Verify empty email and repeat password errors | 🟢 Passed |
+| Auth    | Register    | Open Sign In page from Register               | 🟢 Passed |
+
+---
+
+## Authentication - Sign In
+
+| Section | Sub-section    | Description                          | Result    |
+| ------- | -------------- | ------------------------------------ | --------- |
+| Auth    | Sign In        | Verify empty fields errors           | 🟢 Passed |
+| Auth    | Sign In        | Verify password can't be empty error | 🟢 Passed |
+| Auth    | Sign In        | Verify email can't be empty error    | 🟢 Passed |
+| Auth    | Sign In        | Verify wrong password error          | 🟢 Passed |
+| Auth    | Reset Password | Open Reset Password popup            | 🟢 Passed |
+| Auth    | Reset Password | Close Reset Password popup           | 🟢 Passed |
+
+---
+
+## Search - Functionality & Filters
+
+| Section | Sub-section  | Description                        | Result    |
+| ------- | ------------ | ---------------------------------- | --------- |
+| Search  | Search Field | Verify card search works           | 🟢 Passed |
+| Search  | Search Field | Verify search value persists       | 🟢 Passed |
+| Search  | Filters      | Verify legality filters behavior   | 🟢 Passed |
+| Search  | Filters      | Verify filters persist across tabs | 🟢 Passed |
+| Search  | Filters      | Verify filter removal via Bin      | 🟢 Passed |
+| Search  | Type Line    | Verify Type Line filter            | 🟢 Passed |
+| Search  | Stats        | Verify Stats dropdown filter       | 🟢 Passed |
+
+---
+
+## Search - Cards, Sets & Navigation
+
+| Section | Sub-section  | Description                 | Result    |
+| ------- | ------------ | --------------------------- | --------- |
+| Search  | Card Details | Verify card type            | 🟢 Passed |
+| Search  | Card Details | Verify card legalities      | 🟢 Passed |
+| Search  | Sets         | Verify Sets list            | 🟢 Passed |
+| Search  | Sets         | Open Set and verify details | 🟢 Passed |
+| Search  | Language     | Verify language selection   | 🟢 Passed |
+| Search  | Navigation   | Navigate between cards      | 🟢 Passed |
+
+---
+
+## Summary
+
+- **Total Automated Scenarios:** 70+
+- **Platforms:** Android
+- **Execution:** Local & CI
+- **Reporting:** Allure
+- **Architecture:** Page Object Model
+- **CI/CD:** GitHub Actions
+
+---
+
+## How to Run Tests
+
+```bash
+npm run test:mobile
+npm run test:api
+npm run test:all
