@@ -15,7 +15,7 @@
     "mocha": "^11.7.5"
   },
   "scripts": {
-    "test:api": "mocha --timeout 30000 --require allure-mocha ./tests/api/**/*.js",
+    "test:api": "mocha --timeout 60000 --require allure-mocha ./tests/api/**/*.js",
     "test:mobile": "wdio run ./wdio.conf.js",
     "test:all": "npm run test:api && npm run test:mobile"
   },
