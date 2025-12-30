@@ -31,6 +31,10 @@ class ListForm {
         return $(`~Color`);
     }
 
+    get editBtn() {
+        return $(`~Edit`);
+    }
+
 //*----------------------- List of actions -----------------------*\\
 
     async verifyListFormIsOpen() {
@@ -64,6 +68,16 @@ class ListForm {
 
     async verifyNameErrorNotificationIsPresent() {
         await expect(this.nameErrorNotification).toBeDisplayed();
+    }
+
+    async editRecordValue(value) {
+        await this.nameField.click();
+        await this.nameField.clearValue();
+        await this.nameField.setValue(value);
+    }
+
+    async clickEditBtn() {
+        await this.editBtn.click();
     }
 }
 

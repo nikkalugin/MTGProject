@@ -182,7 +182,7 @@ describe('Testing settings tools', async () => {
     });
 });
 
-describe('Editing collection records', () => {
+describe('Editing Collection records', () => {
     beforeEach(async () => {
         await activateApp("skilldevs.com.manabox");
         await FooterScreen.openCollectionScreen();
@@ -205,6 +205,34 @@ describe('Editing collection records', () => {
         await CollectionScreen.clickEditBtn();
         await BinderForm.editRecordValue('ttt');
         await BinderForm.clickEditBtn();
+        await CollectionScreen.verifyCollectionRecordIsDisplayed('ttt 0 cards');
+    });
+});
+
+describe('Editing List records', () => {
+    beforeEach(async () => {
+        await activateApp("skilldevs.com.manabox");
+        await FooterScreen.openCollectionScreen();
+        await CollectionScreen.verifyCollectionScreenIsOpen();
+        await CollectionScreen.openListsTab();
+        await CollectionScreen.openBinderOrListForm();
+        await ListForm.fillInValueIntoNameField('test');
+        await ListForm.clickCreateBtn();
+    });
+
+    afterEach(async () => {
+        await CollectionScreen.openingRecordSettings('ttt');
+        await CollectionScreen.clickDeleteBtn();
+        await DeleteForm.removeCollectionRecord();
+        await CollectionScreen.verifyRecordIsRemoved('ttt 0 cards');
+        await terminateApp("skilldevs.com.manabox");
+    });
+
+    it('Edit Collection test record', async () => {
+        await CollectionScreen.openingRecordSettings('test');
+        await CollectionScreen.clickEditBtn();
+        await ListForm.editRecordValue('ttt');
+        await ListForm.clickEditBtn();
         await CollectionScreen.verifyCollectionRecordIsDisplayed('ttt 0 cards');
     });
 });
