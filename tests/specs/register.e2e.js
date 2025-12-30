@@ -46,4 +46,9 @@ describe('Register tests', () => {
         await RegisterForm.openSignInForm();
         await SignInForm.verifySignInScreenIsOpen();
     });
+
+    it('Verify Back Button open Manabox Account Page', async () => {
+        await RegisterForm.clickBackBtn();
+        await ManaboxScreen.verifyManaboxScreenIsOpen();
+    });
 });

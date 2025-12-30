@@ -65,4 +65,9 @@ describe('Sign In tests', () => {
         await ResetPasswordForm.clickCancelBtn();
         await ResetPasswordForm.verifyResetPasswordPopupIsClosed();
     });
+
+    it('Verify Back Button opens Manabox Account Page', async () => {
+        await SignInForm.clickBackBtn();
+        await ManaboxScreen.verifyManaboxScreenIsOpen();
+    });
 });

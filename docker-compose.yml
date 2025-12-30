@@ -8,9 +8,12 @@ services:
     container_name: mtg-api-tests
     volumes:
       - ./allure-results:/app/allure-results
+    depends_on:
+      - allure
 
   allure:
     image: frankescobar/allure-docker-service
+    container_name: allure-service
     ports: 
       - "5050:5050"
     volumes:
