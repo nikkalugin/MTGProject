@@ -190,7 +190,7 @@ Reports are available:
 | Search  | Card Details | Verify card legalities      | 🟢 Passed |
 | Search  | Sets         | Verify Sets list            | 🟢 Passed |
 | Search  | Sets         | Open Set and verify details | 🟢 Passed |
-| Search  | Language     | Verify language selection   | 🟢 Passed |
+| Search  | Language     | Verify language selection   | 🔴 Failed |
 | Search  | Navigation   | Navigate between cards      | 🟢 Passed |
 
 ---
