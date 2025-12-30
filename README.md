@@ -190,14 +190,15 @@ Reports are available:
 | Search  | Card Details | Verify card legalities      | 🟢 Passed |
 | Search  | Sets         | Verify Sets list            | 🟢 Passed |
 | Search  | Sets         | Open Set and verify details | 🟢 Passed |
-| Search  | Language     | Verify language selection   | 🔴 Failed |
+| Search  | Language     | Verify language selection   | 🟢 Passed |
 | Search  | Navigation   | Navigate between cards      | 🟢 Passed |
 
 ---
 
 ## Summary
 
-- **Total Automated Scenarios:** 70+
+- **Total Automated Scenarios:** 50+
+- **Total Automated API Scenarios:** 15
 - **Platforms:** Android (self-hosted)
 - **Execution:** Local & CI
 - **Reporting:** Allure
@@ -219,6 +220,3 @@ npm run test:all
 
 ### Run API tests
 docker compose up --build api-tests
-
-### Run Allure
-http://localhost:5050
