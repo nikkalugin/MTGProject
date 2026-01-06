@@ -201,7 +201,7 @@ Reports are available:
 - **Total Automated API Scenarios:** 15
 - **Platforms:** Android (self-hosted)
 - **Execution:** Local & CI
-- **Reporting:** Allure
+- **Reporting Results:** Allure (https://nikkalugin.github.io/MTGProject/)
 - **Architecture:** Page Object Model
 - **CI/CD:** GitHub Actions
 
