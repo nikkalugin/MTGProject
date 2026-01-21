@@ -1,0 +1,23 @@
+services:
+  mobile-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.mobile
+    container_name: mtg-mobile-tests
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./allure-results:/app/allure-results
+    environment:
+      - APPIUM_HOST=host.docker.internal
+      - APPIUM_PORT=4723
+    depends_on:
+      - allure
+
+  allure:
+    image: frankescobar/allure-docker-service
+    container_name: allure-service
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./allure-results:/app/allure-results
