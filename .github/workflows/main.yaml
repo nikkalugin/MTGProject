@@ -32,16 +32,29 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+    - name: Build Docker image
+      run: |
+        docker build -t mtg-mobile-tests .
 
-    - name: Install dependencies
-      run: npm install
+    - name: Run mobile tests in Docker
+      run: |
+        docker run --rm \
+          --network=host \
+          --privileged \
+          -v /dev/bus/usb:/dev/bus/usb \
+          -v $(pwd)/allure-results:/app/allure-results \
+          mtg-mobile-tests
 
-    - name: Run WDIO tests
-      run: npm run test:mobile
+    # - name: Setup Node.js
+    #   uses: actions/setup-node@v4
+    #   with:
+    #     node-version: 20
+
+    # - name: Install dependencies
+    #   run: npm install
+
+    # - name: Run WDIO tests
+    #   run: npm run test:mobile
 
     - name: Generate Allure report
       if: ${{ always() }} 

@@ -7,7 +7,6 @@ export const config = {
     runner: 'local',
     hostname: 'host.docker.internal',
     port: 4723,
-    path: '/wd/hub',
     //
     // ==================
     // Specify Test Files
