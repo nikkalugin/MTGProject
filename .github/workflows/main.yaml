@@ -38,12 +38,10 @@ jobs:
 
     - name: Run mobile tests in Docker
       run: |
-        docker run --rm \
-          --network=host \
-          --privileged \
-          -v /dev/bus/usb:/dev/bus/usb \
-          -v $(pwd)/allure-results:/app/allure-results \
-          mtg-mobile-tests
+        docker run --rm `
+        -e APPIUM_HOST=host.docker.internal `
+        -e APPIUM_PORT=4723 `
+        mtg-mobile-tests
 
     # - name: Setup Node.js
     #   uses: actions/setup-node@v4
