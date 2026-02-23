@@ -38,9 +38,9 @@ jobs:
 
     - name: Run mobile tests in Docker
       run: |
-        docker run --rm `
-        -e APPIUM_HOST=host.docker.internal `
-        -e APPIUM_PORT=4723 `
+        docker run --rm \
+        -e APPIUM_HOST=host.docker.internal \
+        -e APPIUM_PORT=4723 \
         mtg-mobile-tests
 
     # - name: Setup Node.js

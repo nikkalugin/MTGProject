@@ -5,8 +5,8 @@ export const config = {
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
-    hostname: 'host.docker.internal',
-    port: 4723,
+    hostname: process.env.APPIUM_HOST || 'host.docker.internal',
+    port: Number(process.env.APPIUM_PORT) || 4723,
     //
     // ==================
     // Specify Test Files
