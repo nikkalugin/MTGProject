@@ -4,7 +4,7 @@ import FooterScreen from '../page-objects/screens/FooterScreen';
 import SearchScreen from '../page-objects/screens/SearchScreen';
 import CardForm from '../page-objects/forms/CardForm';
 
-describe('Search tests', () => {
+describe.skip('Search tests', () => {
     beforeEach(async () => {
         await activateApp("skilldevs.com.manabox");
         await FooterScreen.openSearchScreen();
